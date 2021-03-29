@@ -64,7 +64,7 @@ PATH="${PATH}:${CRYSTAL_DIR}/bin:${CRYSTAL_DIR}/embedded/bin/"
 cd $BUILD_DIR
 
 start "Installing Dependencies"
-  shards --production
+  shards --production --ignore-crystal-version
 finished
 
 NO_DEBUG_IF_AVAILABLE=`crystal build --help | grep -q -- --no-debug && echo -n --no-debug`
@@ -78,6 +78,6 @@ else
   start "Compiling src/${shard_name}.cr (auto-detected from shard.yml)"
     crystal build src/${shard_name}.cr --release $NO_DEBUG_IF_AVAILABLE -o app
     # shards build
-    shards build --production --release --static --no-debug --progress --verbose --ignore-crystal-version
+    shards build --production --release --static --no-debug --progress --verbose
   finished
 fi
